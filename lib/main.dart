@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart'; // ________________ Ikram
-import 'accueil_page.dart'; // __________________ Ikram
-import 'progression_page.dart'; 
-import 'ajouter_defit_page.dart'; 
-import 'profile_page.dart'; 
+import 'login_page.dart';
+import 'accueil_page.dart';
+import 'progression_page.dart';
+import 'ajouter_defit_page.dart';
+import 'profile_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,13 +16,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login', 
+      initialRoute: '/login',
       routes: {
         '/login': (_) => LoginPage(),
-        '/accueil': (_) => AccueilPage(),
-        '/progression': (_) => ProgressionPage(), 
-        '/ajouter': (_) => AjouterDefitPage(), 
-        '/profil': (_) => ProfilePage(), 
+        '/accueil': (_) => const AccueilPage(),
+        '/ajouter': (_) => AjouterDefitPage(),
+        '/profil': (_) => ProfilePage(),
+        '/progression': (_) => const ProgressionPage(),
       },
     );
   }
