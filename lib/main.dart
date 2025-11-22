@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'accueil_page.dart';
 import 'progression_page.dart';
-import 'ajouter_defit_page.dart';
+import 'ajouter_defit_page.dart'; // <-- Ton fichier
 import 'profile_page.dart';
 
 void main() {
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (_) => LoginPage(),
         '/accueil': (_) => const AccueilPage(),
-        '/ajouter': (_) => AjouterDefitPage(),
+        '/ajouter': (_) => AjouterDefitPage(), // <-- FIXÉ !
         '/profil': (_) => ProfilePage(),
         '/progression': (_) => const ProgressionPage(),
       },
