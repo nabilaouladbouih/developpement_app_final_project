@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
     "name": "flutter_application_hih",
     "short_name": "flutter_application_hih",
+=======
+    "name": "flutter_application_defit",
+    "short_name": "flutter_application_defit",
+>>>>>>> ae33609c4ecfd386781d8a8927c2957f015ba74a
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

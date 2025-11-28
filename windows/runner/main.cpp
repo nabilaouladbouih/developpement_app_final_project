@@ -27,7 +27,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   FlutterWindow window(project);
   Win32Window::Point origin(10, 10);
   Win32Window::Size size(1280, 720);
+<<<<<<< HEAD
   if (!window.Create(L"flutter_application_hih", origin, size)) {
+=======
+  if (!window.Create(L"flutter_application_defit", origin, size)) {
+>>>>>>> ae33609c4ecfd386781d8a8927c2957f015ba74a
     return EXIT_FAILURE;
   }
   window.SetQuitOnClose(true);

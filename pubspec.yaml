@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name: sport_defi_app
 description: "Application Sport Defi"
 publish_to: 'none'
@@ -5,12 +6,24 @@ version: 1.0.0+1
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
+=======
+name: flutter_application_defit
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.9.2
+>>>>>>> ae33609c4ecfd386781d8a8927c2957f015ba74a
 
 dependencies:
   flutter:
     sdk: flutter
+<<<<<<< HEAD
   shared_preferences: ^2.2.2
   provider: ^6.1.2
+=======
+>>>>>>> ae33609c4ecfd386781d8a8927c2957f015ba74a
 
 dev_dependencies:
   flutter_test:
@@ -20,4 +33,13 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+<<<<<<< HEAD
     - images/
+=======
+    - images/
+
+
+
+
+
+>>>>>>> ae33609c4ecfd386781d8a8927c2957f015ba74a
