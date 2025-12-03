@@ -4,17 +4,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AppState with ChangeNotifier {
   Map<String, dynamic>? _currentUser;
   Map<String, dynamic>? get currentUser => _currentUser;
-  
+
   bool _isDarkMode = false;
   String _language = 'Francais';
   String _noteDeplacement = '';
   bool _notifications = true;
-  
+
   bool get isDarkMode => _isDarkMode;
   String get language => _language;
   String get noteDeplacement => _noteDeplacement;
   bool get notifications => _notifications;
-  
+
   List<Map<String, dynamic>> _userDefis = [];
   List<Map<String, dynamic>> get userDefis => _userDefis;
 
@@ -67,7 +67,9 @@ class AppState with ChangeNotifier {
       if (defisJson != null) {
         _allDefis = _parseStorageData(defisJson);
         if (_currentUser != null) {
-          _userDefis = _allDefis.where((defi) => defi['userId'] == _currentUser!['id']).toList();
+          _userDefis = _allDefis
+              .where((defi) => defi['userId'] == _currentUser!['id'])
+              .toList();
         }
         print('${_allDefis.length} défi(s) chargé(s)');
       }
@@ -113,26 +115,32 @@ class AppState with ChangeNotifier {
 
   // ========== GESTION PROFIL UTILISATEUR ==========
 
-  Future<void> updateUserProfile(String nom, String prenom, String dateNaissance) async {
+  Future<void> updateUserProfile(
+    String nom,
+    String prenom,
+    String dateNaissance,
+  ) async {
     if (_currentUser == null) return;
-    
+
     try {
       // Mettre à jour l'utilisateur courant
       _currentUser!['nom'] = nom;
       _currentUser!['prenom'] = prenom;
       _currentUser!['birthday'] = dateNaissance;
-      
+
       // Mettre à jour dans la liste des utilisateurs
-      final userIndex = _allUsers.indexWhere((user) => user['id'] == _currentUser!['id']);
+      final userIndex = _allUsers.indexWhere(
+        (user) => user['id'] == _currentUser!['id'],
+      );
       if (userIndex != -1) {
         _allUsers[userIndex] = {..._currentUser!};
         await _saveUsers();
       }
-      
+
       notifyListeners();
-      print('✅ Profil mis à jour: $prenom $nom');
+      print('Profil mis à jour: $prenom $nom');
     } catch (e) {
-      print('❌ Erreur mise à jour profil: $e');
+      print('Erreur mise à jour profil: $e');
     }
   }
 
@@ -146,8 +154,8 @@ class AppState with ChangeNotifier {
 
   Future<bool> login(String username, String password) async {
     try {
-      print('🔐 Tentative de connexion: $username');
-      
+      print('Tentative de connexion: $username');
+
       final user = _allUsers.firstWhere(
         (user) => user['username'] == username && user['password'] == password,
         orElse: () => {},
@@ -155,31 +163,35 @@ class AppState with ChangeNotifier {
 
       if (user.isNotEmpty) {
         _currentUser = user;
-        _userDefis = _allDefis.where((defi) => defi['userId'] == user['id']).toList();
+        _userDefis = _allDefis
+            .where((defi) => defi['userId'] == user['id'])
+            .toList();
         notifyListeners();
-        print('✅ Connexion réussie: $username');
+        print('Connexion réussie: $username');
         return true;
       } else {
-        print('❌ Échec connexion: $username');
+        print('Échec connexion: $username');
         return false;
       }
     } catch (e) {
-      print('❌ Erreur login: $e');
+      print('Erreur login: $e');
       return false;
     }
   }
 
   Future<bool> signup(String username, String password, String birthday) async {
     try {
-      print('📝 Tentative d inscription: $username');
-      
+      print('Tentative d inscription: $username');
+
       // Vérifier si l'utilisateur existe déjà
-      final existingUser = _allUsers.any((user) => user['username'] == username);
+      final existingUser = _allUsers.any(
+        (user) => user['username'] == username,
+      );
       if (existingUser) {
-        print('❌ Utilisateur déjà existant: $username');
+        print('Utilisateur déjà existant: $username');
         return false;
       }
-      
+
       // Créer le nouvel utilisateur
       final newUser = {
         'id': DateTime.now().millisecondsSinceEpoch,
@@ -189,18 +201,18 @@ class AppState with ChangeNotifier {
         'nom': '',
         'prenom': '',
       };
-      
+
       _allUsers.add(newUser);
       await _saveUsers();
-      
+
       _currentUser = newUser;
       _userDefis = [];
       notifyListeners();
-      
+
       print('✅ Inscription réussie: $username');
       return true;
     } catch (e) {
-      print('❌ Erreur signup: $e');
+      print('Erreur signup: $e');
       return false;
     }
   }
@@ -209,14 +221,14 @@ class AppState with ChangeNotifier {
     _currentUser = null;
     _userDefis.clear();
     notifyListeners();
-    print('🚪 Déconnexion');
+    print('Déconnexion');
   }
 
   // ========== GESTION DÉFIS ==========
 
   Future<void> addDefi(Map<String, dynamic> defi) async {
     if (_currentUser == null) return;
-    
+
     try {
       final newDefi = {
         ...defi,
@@ -224,15 +236,15 @@ class AppState with ChangeNotifier {
         'userId': _currentUser!['id'],
         'joursFaits': 0,
       };
-      
+
       _allDefis.add(newDefi);
       _userDefis.add(newDefi);
       await _saveDefis();
       notifyListeners();
-      
-      print('✅ Défi ajouté: ${defi['nom']}');
+
+      print('Défi ajouté: ${defi['nom']}');
     } catch (e) {
-      print('❌ Erreur ajout défi: $e');
+      print('Erreur ajout défi: $e');
     }
   }
 
@@ -242,16 +254,18 @@ class AppState with ChangeNotifier {
       if (defiIndex != -1) {
         _allDefis[defiIndex]['joursFaits'] = joursFaits;
         await _saveDefis();
-        
-        final userDefiIndex = _userDefis.indexWhere((defi) => defi['id'] == defiId);
+
+        final userDefiIndex = _userDefis.indexWhere(
+          (defi) => defi['id'] == defiId,
+        );
         if (userDefiIndex != -1) {
           _userDefis[userDefiIndex]['joursFaits'] = joursFaits;
         }
-        
+
         notifyListeners();
       }
     } catch (e) {
-      print('❌ Erreur mise à jour progression: $e');
+      print('Erreur mise à jour progression: $e');
     }
   }
 
@@ -262,7 +276,7 @@ class AppState with ChangeNotifier {
       await _saveDefis();
       notifyListeners();
     } catch (e) {
-      print('❌ Erreur suppression défi: $e');
+      print('Erreur suppression défi: $e');
     }
   }
 
@@ -297,27 +311,31 @@ class AppState with ChangeNotifier {
   List<Map<String, dynamic>> _parseStorageData(String data) {
     try {
       if (data == '[]') return [];
-      
+
       final List<Map<String, dynamic>> result = [];
       final items = data.substring(1, data.length - 1).split('}, {');
-      
+
       for (var item in items) {
         final cleanedItem = item.replaceAll('{', '').replaceAll('}', '');
         final pairs = cleanedItem.split(', ');
         final Map<String, dynamic> map = {};
-        
+
         for (var pair in pairs) {
           final keyValue = pair.split(': ');
           if (keyValue.length == 2) {
             var key = keyValue[0].trim();
             var value = keyValue[1].trim();
-            
+
             // Nettoyer les guillemets
             key = key.replaceAll("'", "");
             value = value.replaceAll("'", "");
-            
+
             // Convertir les types
-            if (key == 'id' || key == 'userId' || key == 'jours' || key == 'joursFaits' || key == 'personnes') {
+            if (key == 'id' ||
+                key == 'userId' ||
+                key == 'jours' ||
+                key == 'joursFaits' ||
+                key == 'personnes') {
               map[key] = int.tryParse(value) ?? value;
             } else if (key == 'isDarkMode' || key == 'notifications') {
               map[key] = value == 'true';
@@ -326,12 +344,12 @@ class AppState with ChangeNotifier {
             }
           }
         }
-        
+
         if (map.isNotEmpty) {
           result.add(map);
         }
       }
-      
+
       return result;
     } catch (e) {
       print('Erreur parsing data: $e');
@@ -340,27 +358,27 @@ class AppState with ChangeNotifier {
   }
 
   // ========== DEBUG ==========
-  
+
   void debugShowUsers() {
-    print('=== 📊 DONNÉES DE L\'APPLICATION ===');
-    
+    print('=== DONNÉES DE L\'APPLICATION ===');
+
     // Utilisateurs
     print('👥 UTILISATEURS (${_allUsers.length}):');
     for (var user in _allUsers) {
       print('   - ${user['username']} (ID: ${user['id']})');
-      print('     📧 Nom: ${user['nom']}');
-      print('     👤 Prénom: ${user['prenom']}');
-      print('     🎂 Date: ${user['birthday']}');
+      print('     Nom: ${user['nom']}');
+      print('     Prénom: ${user['prenom']}');
+      print('     Date: ${user['birthday']}');
     }
-    
+
     // Défis
     print('\n🎯 DÉFIS (${_allDefis.length}):');
     for (var defi in _allDefis) {
       print('   - ${defi['nom']} (UserID: ${defi['userId']})');
-      print('     📝 Desc: ${defi['description']}');
-      print('     📅 Jours: ${defi['jours']}/${defi['joursFaits']}');
+      print('     Desc: ${defi['description']}');
+      print('     Jours: ${defi['jours']}/${defi['joursFaits']}');
     }
-    
+
     // Utilisateur courant
     print('\n🔗 UTILISATEUR COURANT:');
     if (_currentUser != null) {
@@ -369,7 +387,7 @@ class AppState with ChangeNotifier {
     } else {
       print('   - Aucun utilisateur connecté');
     }
-    
+
     print('====================================');
   }
 
