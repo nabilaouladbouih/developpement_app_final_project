@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:provider/provider.dart';
 import 'app_state.dart';
 import 'login_page.dart';
 import 'accueil_page.dart';
 import 'progression_page.dart';
 import 'ajouter_defit_page.dart';
-=======
-import 'login_page.dart';
-import 'accueil_page.dart';
-import 'progression_page.dart';
-import 'ajouter_defit_page.dart'; // <-- Ton fichier
->>>>>>> ae33609c4ecfd386781d8a8927c2957f015ba74a
 import 'profile_page.dart';
 
 void main() {
@@ -23,7 +16,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     return ChangeNotifierProvider(
       create: (context) => AppState(),
       child: Consumer<AppState>(
@@ -32,16 +24,51 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: ThemeData.light().copyWith(
               primaryColor: const Color.fromARGB(255, 187, 134, 70),
+              scaffoldBackgroundColor: Colors.white,
+              appBarTheme: const AppBarTheme(
+                backgroundColor: Color.fromARGB(255, 187, 134, 70),
+                foregroundColor: Colors.white,
+              ),
+              elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 187, 134, 70),
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
             ),
-            darkTheme: ThemeData.dark(),
+            darkTheme: ThemeData.dark().copyWith(
+              primaryColor: const Color.fromARGB(255, 187, 134, 70),
+              scaffoldBackgroundColor: Colors.grey[900],
+              appBarTheme: AppBarTheme(
+                backgroundColor: Colors.grey[800],
+                foregroundColor: Colors.white,
+              ),
+              elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 187, 134, 70),
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+            ),
             themeMode: appState.isDarkMode ? ThemeMode.dark : ThemeMode.light,
             initialRoute: '/login',
             routes: {
-              '/login': (_) => const LoginPage(),
-              '/accueil': (_) => const AccueilPage(),
-              '/ajouter': (_) => const AjouterDefitPage(),
-              '/profil': (_) => const ProfilePage(),
-              '/progression': (_) => const ProgressionPage(),
+              '/login': (context) => const LoginPage(),
+              '/accueil': (context) => const AccueilPage(),
+              '/ajouter': (context) => const AjouterDefitPage(),
+              '/profil': (context) => const ProfilePage(),
+              '/progression': (context) => const ProgressionPage(),
+            },
+            onUnknownRoute: (settings) {
+              return MaterialPageRoute(
+                builder: (context) => const LoginPage(),
+              );
             },
           );
         },
@@ -49,18 +76,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-=======
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/login',
-      routes: {
-        '/login': (_) => LoginPage(),
-        '/accueil': (_) => const AccueilPage(),
-        '/ajouter': (_) => AjouterDefitPage(), // <-- FIXÉ !
-        '/profil': (_) => ProfilePage(),
-        '/progression': (_) => const ProgressionPage(),
-      },
-    );
-  }
-}
->>>>>>> ae33609c4ecfd386781d8a8927c2957f015ba74a

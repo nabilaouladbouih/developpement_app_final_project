@@ -1,29 +1,17 @@
-<<<<<<< HEAD
 name: sport_defi_app
-description: "Application Sport Defi"
+description: "Une application de suivi de défis sportifs"
 publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
-=======
-name: flutter_application_defit
-description: "A new Flutter project."
-publish_to: 'none'
-version: 0.1.0
-
-environment:
-  sdk: ^3.9.2
->>>>>>> ae33609c4ecfd386781d8a8927c2957f015ba74a
+  sdk: ">=3.9.0 <4.0.0"
+  flutter: ">=3.35.0"
 
 dependencies:
   flutter:
     sdk: flutter
-<<<<<<< HEAD
-  shared_preferences: ^2.2.2
-  provider: ^6.1.2
-=======
->>>>>>> ae33609c4ecfd386781d8a8927c2957f015ba74a
+  provider: ^6.1.5+1
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:
@@ -32,14 +20,15 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  
   assets:
-<<<<<<< HEAD
     - images/
-=======
-    - images/
-
-
-
-
-
->>>>>>> ae33609c4ecfd386781d8a8927c2957f015ba74a
+    - images/sq.jpg
+    - images/courir.jpg
+    - images/defit3.jpeg
+    - images/defit4.jpg
+    - images/defit5.jpg
+    - images/defit6.jpg
+    - images/defis7.jpg
+    - images/background.png
+    - images/logo.png
