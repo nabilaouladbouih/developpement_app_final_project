@@ -209,7 +209,7 @@ class AppState with ChangeNotifier {
       _userDefis = [];
       notifyListeners();
 
-      print('✅ Inscription réussie: $username');
+      print('Inscription réussie: $username');
       return true;
     } catch (e) {
       print('Erreur signup: $e');
@@ -372,7 +372,7 @@ class AppState with ChangeNotifier {
     }
 
     // Défis
-    print('\n🎯 DÉFIS (${_allDefis.length}):');
+    print('\nDÉFIS (${_allDefis.length}):');
     for (var defi in _allDefis) {
       print('   - ${defi['nom']} (UserID: ${defi['userId']})');
       print('     Desc: ${defi['description']}');
@@ -380,7 +380,7 @@ class AppState with ChangeNotifier {
     }
 
     // Utilisateur courant
-    print('\n🔗 UTILISATEUR COURANT:');
+    print('\nUTILISATEUR COURANT:');
     if (_currentUser != null) {
       print('   - ${_currentUser!['username']}');
       print('   - Défis: ${_userDefis.length}');

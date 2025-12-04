@@ -52,8 +52,11 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  // Méthodes pour les popups
-  void _afficherChoixApparence(BuildContext context, bool isDarkMode, AppState appState) {
+  void _afficherChoixApparence(
+    BuildContext context,
+    bool isDarkMode,
+    AppState appState,
+  ) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -67,13 +70,19 @@ class _ProfilePageState extends State<ProfilePage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                leading: Icon(Icons.light_mode,
-                    color: isDarkMode ? Colors.white : Colors.black),
-                title: Text("Light mode",
-                    style: TextStyle(
-                        color: isDarkMode ? Colors.white : Colors.black)),
-                trailing:
-                    !isDarkMode ? const Icon(Icons.check, color: Colors.green) : null,
+                leading: Icon(
+                  Icons.light_mode,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
+                title: Text(
+                  "Light mode",
+                  style: TextStyle(
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ),
+                trailing: !isDarkMode
+                    ? const Icon(Icons.check, color: Colors.green)
+                    : null,
                 onTap: () {
                   appState.toggleDarkMode(false);
                   Navigator.pop(context);
@@ -81,13 +90,19 @@ class _ProfilePageState extends State<ProfilePage> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.dark_mode,
-                    color: isDarkMode ? Colors.white : Colors.black),
-                title: Text("Dark mode",
-                    style: TextStyle(
-                        color: isDarkMode ? Colors.white : Colors.black)),
-                trailing:
-                    isDarkMode ? const Icon(Icons.check, color: Colors.green) : null,
+                leading: Icon(
+                  Icons.dark_mode,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
+                title: Text(
+                  "Dark mode",
+                  style: TextStyle(
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ),
+                trailing: isDarkMode
+                    ? const Icon(Icons.check, color: Colors.green)
+                    : null,
                 onTap: () {
                   appState.toggleDarkMode(true);
                   Navigator.pop(context);
@@ -101,7 +116,11 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  void _afficherChoixLangue(BuildContext context, bool isDarkMode, AppState appState) {
+  void _afficherChoixLangue(
+    BuildContext context,
+    bool isDarkMode,
+    AppState appState,
+  ) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -115,11 +134,16 @@ class _ProfilePageState extends State<ProfilePage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                leading:
-                    Icon(Icons.language, color: isDarkMode ? Colors.white : Colors.black),
-                title: Text("Français",
-                    style: TextStyle(
-                        color: isDarkMode ? Colors.white : Colors.black)),
+                leading: Icon(
+                  Icons.language,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
+                title: Text(
+                  "Français",
+                  style: TextStyle(
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ),
                 trailing: appState.language == "Français"
                     ? const Icon(Icons.check, color: Colors.green)
                     : null,
@@ -130,11 +154,16 @@ class _ProfilePageState extends State<ProfilePage> {
                 },
               ),
               ListTile(
-                leading:
-                    Icon(Icons.language, color: isDarkMode ? Colors.white : Colors.black),
-                title: Text("English",
-                    style: TextStyle(
-                        color: isDarkMode ? Colors.white : Colors.black)),
+                leading: Icon(
+                  Icons.language,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
+                title: Text(
+                  "English",
+                  style: TextStyle(
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ),
                 trailing: appState.language == "English"
                     ? const Icon(Icons.check, color: Colors.green)
                     : null,
@@ -151,16 +180,29 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  void _modifierProfil(BuildContext context, bool isDarkMode, AppState appState) {
-    TextEditingController nomController = TextEditingController(text: appState.userNom);
-    TextEditingController prenomController = TextEditingController(text: appState.userPrenom);
-    TextEditingController dateController = TextEditingController(text: appState.userBirthday);
+  void _modifierProfil(
+    BuildContext context,
+    bool isDarkMode,
+    AppState appState,
+  ) {
+    TextEditingController nomController = TextEditingController(
+      text: appState.userNom,
+    );
+    TextEditingController prenomController = TextEditingController(
+      text: appState.userPrenom,
+    );
+    TextEditingController dateController = TextEditingController(
+      text: appState.userBirthday,
+    );
 
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("Modifier le profil", style: TextStyle(color: _getTextColor(isDarkMode))),
+          title: Text(
+            "Modifier le profil",
+            style: TextStyle(color: _getTextColor(isDarkMode)),
+          ),
           backgroundColor: isDarkMode ? Colors.grey[900] : Colors.white,
           content: SingleChildScrollView(
             child: Column(
@@ -201,7 +243,10 @@ class _ProfilePageState extends State<ProfilePage> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text("Annuler", style: TextStyle(color: _getTextColor(isDarkMode))),
+              child: Text(
+                "Annuler",
+                style: TextStyle(color: _getTextColor(isDarkMode)),
+              ),
             ),
             TextButton(
               onPressed: () {
@@ -213,7 +258,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 Navigator.pop(context);
                 _afficherMessageProfil(context);
               },
-              child: const Text("Enregistrer", style: TextStyle(color: Colors.green)),
+              child: const Text(
+                "Enregistrer",
+                style: TextStyle(color: Colors.green),
+              ),
             ),
           ],
         );
@@ -226,22 +274,33 @@ class _ProfilePageState extends State<ProfilePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Déconnexion",
-              style: TextStyle(color: _getTextColor(isDarkMode))),
+          title: Text(
+            "Déconnexion",
+            style: TextStyle(color: _getTextColor(isDarkMode)),
+          ),
           backgroundColor: isDarkMode ? Colors.grey[900] : Colors.white,
-          content: Text("Êtes-vous sûr de vouloir vous déconnecter ?",
-              style: TextStyle(color: _getTextColor(isDarkMode))),
+          content: Text(
+            "Êtes-vous sûr de vouloir vous déconnecter ?",
+            style: TextStyle(color: _getTextColor(isDarkMode)),
+          ),
           actions: [
             TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text("Annuler", style: TextStyle(color: _getTextColor(isDarkMode)))),
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                "Annuler",
+                style: TextStyle(color: _getTextColor(isDarkMode)),
+              ),
+            ),
             TextButton(
               onPressed: () {
                 appState.logout();
                 Navigator.pop(context);
                 Navigator.pushReplacementNamed(context, '/login');
               },
-              child: const Text("Déconnexion", style: TextStyle(color: Colors.red)),
+              child: const Text(
+                "Déconnexion",
+                style: TextStyle(color: Colors.red),
+              ),
             ),
           ],
         );
@@ -270,40 +329,58 @@ class _ProfilePageState extends State<ProfilePage> {
                 const SizedBox(height: 50),
                 Center(child: Image.asset('images/logo.png', height: 140)),
                 const SizedBox(height: 10),
-                Text("Profil",
-                    style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: _getPrimaryColor(isDarkMode))),
+                Text(
+                  "Profil",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: _getPrimaryColor(isDarkMode),
+                  ),
+                ),
                 const SizedBox(height: 25),
-                
+
                 // BONJOUR + USERNAME
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Row(
                     children: [
-                      Text("Bonjour ",
-                          style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.italic,
-                              color: _getTextColor(isDarkMode))),
-                      Text(appState.userUsername.isNotEmpty ? appState.userUsername : appState.username,
-                          style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w700,
-                              color: _getTextColor(isDarkMode))),
+                      Text(
+                        "Bonjour ",
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                          fontStyle: FontStyle.italic,
+                          color: _getTextColor(isDarkMode),
+                        ),
+                      ),
+                      Text(
+                        appState.userUsername.isNotEmpty
+                            ? appState.userUsername
+                            : appState.username,
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700,
+                          color: _getTextColor(isDarkMode),
+                        ),
+                      ),
                       const Spacer(),
-                      Icon(Icons.account_circle,
-                          size: 40, color: _getPrimaryColor(isDarkMode)),
+                      Icon(
+                        Icons.account_circle,
+                        size: 40,
+                        color: _getPrimaryColor(isDarkMode),
+                      ),
                     ],
                   ),
                 ),
-                
+
                 // INFOS PROFIL
-                if (appState.userPrenom.isNotEmpty || appState.userNom.isNotEmpty)
+                if (appState.userPrenom.isNotEmpty ||
+                    appState.userNom.isNotEmpty)
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 25,
+                      vertical: 10,
+                    ),
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
@@ -312,12 +389,16 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       child: Row(
                         children: [
-                          Icon(Icons.person, color: _getPrimaryColor(isDarkMode)),
+                          Icon(
+                            Icons.person,
+                            color: _getPrimaryColor(isDarkMode),
+                          ),
                           const SizedBox(width: 10),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              if (appState.userPrenom.isNotEmpty && appState.userNom.isNotEmpty)
+                              if (appState.userPrenom.isNotEmpty &&
+                                  appState.userNom.isNotEmpty)
                                 Text(
                                   "${appState.userPrenom} ${appState.userNom}",
                                   style: TextStyle(
@@ -331,7 +412,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                   "Né(e) le ${appState.userBirthday}",
                                   style: TextStyle(
                                     fontSize: 14,
-                                    color: _getTextColor(isDarkMode).withOpacity(0.7),
+                                    color: _getTextColor(
+                                      isDarkMode,
+                                    ).withOpacity(0.7),
                                   ),
                                 ),
                             ],
@@ -342,7 +425,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
 
                 const SizedBox(height: 20),
-                
+
                 // PARAMÈTRES
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -353,15 +436,24 @@ class _ProfilePageState extends State<ProfilePage> {
                       borderRadius: BorderRadius.circular(25),
                       boxShadow: [
                         BoxShadow(
-                            blurRadius: 10, color: Colors.black.withOpacity(0.3)),
+                          blurRadius: 10,
+                          color: Colors.black.withOpacity(0.3),
+                        ),
                       ],
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         GestureDetector(
-                          onTap: () => _afficherChoixApparence(context, isDarkMode, appState),
-                          child: _itemApparence(isDarkMode, appState.isDarkMode ? "Dark mode" : "Light mode"),
+                          onTap: () => _afficherChoixApparence(
+                            context,
+                            isDarkMode,
+                            appState,
+                          ),
+                          child: _itemApparence(
+                            isDarkMode,
+                            appState.isDarkMode ? "Dark mode" : "Light mode",
+                          ),
                         ),
                         _divider(isDarkMode),
                         _itemAvecSwitch(
@@ -375,32 +467,52 @@ class _ProfilePageState extends State<ProfilePage> {
                         _divider(isDarkMode),
                         Padding(
                           padding: const EdgeInsets.only(left: 5, bottom: 8),
-                          child: Text("Gestion du profil",
-                              style: TextStyle(
-                                  color: isDarkMode ? Colors.white70 : Colors.grey,
-                                  fontSize: 13)),
+                          child: Text(
+                            "Gestion du profil",
+                            style: TextStyle(
+                              color: isDarkMode ? Colors.white70 : Colors.grey,
+                              fontSize: 13,
+                            ),
+                          ),
                         ),
                         GestureDetector(
-                          onTap: () => _modifierProfil(context, isDarkMode, appState),
-                          child: _item(Icons.person, "Modifier le profil", isDarkMode),
+                          onTap: () =>
+                              _modifierProfil(context, isDarkMode, appState),
+                          child: _item(
+                            Icons.person,
+                            "Modifier le profil",
+                            isDarkMode,
+                          ),
                         ),
                         _divider(isDarkMode),
                         GestureDetector(
-                          onTap: () => _afficherChoixLangue(context, isDarkMode, appState),
+                          onTap: () => _afficherChoixLangue(
+                            context,
+                            isDarkMode,
+                            appState,
+                          ),
                           child: _itemLangue(isDarkMode, language),
                         ),
                         _divider(isDarkMode),
                         GestureDetector(
-                          onTap: () => _deconnexion(context, isDarkMode, appState),
+                          onTap: () =>
+                              _deconnexion(context, isDarkMode, appState),
                           child: Row(
                             children: [
-                              const Icon(Icons.logout, color: Colors.red, size: 22),
+                              const Icon(
+                                Icons.logout,
+                                color: Colors.red,
+                                size: 22,
+                              ),
                               const SizedBox(width: 15),
-                              const Text("Déconnexion",
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16)),
+                              const Text(
+                                "Déconnexion",
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -412,8 +524,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
           ),
-          
-          // BARRE DE NAVIGATION
+
           Positioned(
             bottom: 20,
             left: 20,
@@ -421,7 +532,9 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: BoxDecoration(
-                color: isDarkMode ? Colors.grey[800]! : Colors.black.withOpacity(0.6),
+                color: isDarkMode
+                    ? Colors.grey[800]!
+                    : Colors.black.withOpacity(0.6),
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Row(
@@ -435,8 +548,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white.withOpacity(0.2)),
+                      shape: BoxShape.circle,
+                      color: Colors.white.withOpacity(0.2),
+                    ),
                     child: IconButton(
                       icon: const Icon(Icons.add),
                       color: Colors.white,
@@ -448,7 +562,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     icon: const Icon(Icons.show_chart),
                     color: Colors.white,
                     iconSize: 30,
-                    onPressed: () => Navigator.pushNamed(context, '/progression'),
+                    onPressed: () =>
+                        Navigator.pushNamed(context, '/progression'),
                   ),
                   IconButton(
                     icon: const Icon(Icons.person),
@@ -465,7 +580,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  // ====== Widgets réutilisés ======
+  // Widgets
   Widget _item(IconData icon, String label, bool isDarkMode) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
@@ -473,13 +588,20 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           Icon(icon, size: 22, color: _getTextColor(isDarkMode)),
           const SizedBox(width: 15),
-          Text(label,
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: _getTextColor(isDarkMode))),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              color: _getTextColor(isDarkMode),
+            ),
+          ),
           const Spacer(),
-          Icon(Icons.arrow_forward_ios, size: 16, color: _getTextColor(isDarkMode)),
+          Icon(
+            Icons.arrow_forward_ios,
+            size: 16,
+            color: _getTextColor(isDarkMode),
+          ),
         ],
       ),
     );
@@ -490,38 +612,53 @@ class _ProfilePageState extends State<ProfilePage> {
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
         children: [
-          Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode,
-              size: 22, color: _getTextColor(isDarkMode)),
+          Icon(
+            isDarkMode ? Icons.dark_mode : Icons.light_mode,
+            size: 22,
+            color: _getTextColor(isDarkMode),
+          ),
           const SizedBox(width: 15),
           Expanded(
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Apparence",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: _getTextColor(isDarkMode))),
-                  const SizedBox(height: 2),
-                  Text(currentMode,
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: isDarkMode ? Colors.white70 : Colors.grey)),
-                ]),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Apparence",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: _getTextColor(isDarkMode),
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  currentMode,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: isDarkMode ? Colors.white70 : Colors.grey,
+                  ),
+                ),
+              ],
+            ),
           ),
-          Icon(Icons.arrow_forward_ios, size: 16, color: _getTextColor(isDarkMode))
+          Icon(
+            Icons.arrow_forward_ios,
+            size: 16,
+            color: _getTextColor(isDarkMode),
+          ),
         ],
       ),
     );
   }
 
   Widget _itemAvecSwitch(
-      IconData icon,
-      String label,
-      String sousTitre,
-      bool valeur,
-      Function(bool) onChanged,
-      bool isDarkMode) {
+    IconData icon,
+    String label,
+    String sousTitre,
+    bool valeur,
+    Function(bool) onChanged,
+    bool isDarkMode,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
@@ -530,24 +667,32 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(width: 15),
           Expanded(
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(label,
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: _getTextColor(isDarkMode))),
-                  const SizedBox(height: 2),
-                  Text(sousTitre,
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: isDarkMode ? Colors.white70 : Colors.grey)),
-                ]),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: _getTextColor(isDarkMode),
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  sousTitre,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: isDarkMode ? Colors.white70 : Colors.grey,
+                  ),
+                ),
+              ],
+            ),
           ),
           Switch(
-              value: valeur,
-              onChanged: onChanged,
-              activeColor: _getPrimaryColor(isDarkMode))
+            value: valeur,
+            onChanged: onChanged,
+            activeColor: _getPrimaryColor(isDarkMode),
+          ),
         ],
       ),
     );
@@ -562,21 +707,32 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(width: 15),
           Expanded(
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Langue",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: _getTextColor(isDarkMode))),
-                  const SizedBox(height: 2),
-                  Text(currentLanguage,
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: isDarkMode ? Colors.white70 : Colors.grey)),
-                ]),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Langue",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: _getTextColor(isDarkMode),
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  currentLanguage,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: isDarkMode ? Colors.white70 : Colors.grey,
+                  ),
+                ),
+              ],
+            ),
           ),
-          Icon(Icons.arrow_forward_ios, size: 16, color: _getTextColor(isDarkMode))
+          Icon(
+            Icons.arrow_forward_ios,
+            size: 16,
+            color: _getTextColor(isDarkMode),
+          ),
         ],
       ),
     );
