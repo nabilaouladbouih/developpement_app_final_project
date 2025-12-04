@@ -209,7 +209,7 @@ class AppState with ChangeNotifier {
       _userDefis = [];
       notifyListeners();
 
-      print('✅ Inscription réussie: $username');
+      print(' Inscription réussie: $username');
       return true;
     } catch (e) {
       print('Erreur signup: $e');
@@ -363,7 +363,7 @@ class AppState with ChangeNotifier {
     print('=== DONNÉES DE L\'APPLICATION ===');
 
     // Utilisateurs
-    print('👥 UTILISATEURS (${_allUsers.length}):');
+    print(' UTILISATEURS (${_allUsers.length}):');
     for (var user in _allUsers) {
       print('   - ${user['username']} (ID: ${user['id']})');
       print('     Nom: ${user['nom']}');
@@ -372,7 +372,7 @@ class AppState with ChangeNotifier {
     }
 
     // Défis
-    print('\n🎯 DÉFIS (${_allDefis.length}):');
+    print('\n DÉFIS (${_allDefis.length}):');
     for (var defi in _allDefis) {
       print('   - ${defi['nom']} (UserID: ${defi['userId']})');
       print('     Desc: ${defi['description']}');
@@ -380,7 +380,7 @@ class AppState with ChangeNotifier {
     }
 
     // Utilisateur courant
-    print('\n🔗 UTILISATEUR COURANT:');
+    print('\n UTILISATEUR COURANT:');
     if (_currentUser != null) {
       print('   - ${_currentUser!['username']}');
       print('   - Défis: ${_userDefis.length}');
@@ -394,3 +394,4 @@ class AppState with ChangeNotifier {
   bool get isLoggedIn => _currentUser != null;
   String get username => _currentUser?['username'] ?? '';
 }
+
